@@ -1,9 +1,17 @@
 const mainData = () => {
 
+  const renderGanreList = (ganres) => {
+    const dropDownBlock = document.querySelector('.header__menu .dropdown')
+
+    ganres.forEach(ganre => {
+      dropDownBlock.insertAdjacentHTML('beforeend', `
+        <li><a href="./categories.html?ganre=${ganre}">${ganre}</a></li>
+      `)
+    })
+  }
+
   const renderAnimeList = (arr, ganres) => {
     const wrapper = document.querySelector('.product .col-lg-8')
-
-    wrapper.innerHTML = ''
 
     ganres.forEach((ganre) => {
       const productBlock = document.createElement('div')
@@ -13,7 +21,7 @@ const mainData = () => {
       listBlock.classList.add('row')
       productBlock.classList.add('mb-5')
 
-      productBlock.insertAdjacentHTML('afterbegin', `
+      productBlock.insertAdjacentHTML('beforeend', `
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8">
                 <div class="section-title">
@@ -32,12 +40,12 @@ const mainData = () => {
         const tagsBlock = document.createElement('ul')
 
         item.tags.forEach(tag => {
-          tagsBlock.insertAdjacentHTML('afterbegin', `
+          tagsBlock.insertAdjacentHTML('beforeend', `
             <li>${tag}</li>
           `)
         })
 
-        listBlock.insertAdjacentHTML('afterbegin', `
+        listBlock.insertAdjacentHTML('beforeend', `
           <div class="col-lg-4 col-md-6 col-sm-6">
               <div class="product__item">
                   <div class="product__item__pic set-bg" data-setbg="${item.image}">
@@ -65,10 +73,8 @@ const mainData = () => {
   const renderTopAnime = (arr) => {
     const wrapper = document.querySelector('.filter__gallery')
 
-    wrapper.innerHTML = ''
-
     arr.forEach((item) => {
-      wrapper.insertAdjacentHTML('afterbegin', `
+      wrapper.insertAdjacentHTML('beforeend', `
         <div class="product__sidebar__view__item set-bg mix day years" data-setbg="${item.image}">
             <div class="ep">${item.rating} / 10</div>
             <div class="view"><i class="fa fa-eye"></i> ${item.views}</div>
@@ -83,19 +89,17 @@ const mainData = () => {
   }
 
   fetch('https://anime-dd1ff-default-rtdb.firebaseio.com/anime.json')
-    .then((response) => {
-      return response.json()
-    })
+    .then((response) => response.json())
     .then((data) => {
       const ganres = new Set()
-
-      renderTopAnime(data.sort((a, b) => b.views - a.views).slice(0, 5))
 
       data.forEach((item) => {
         ganres.add(item.ganre)
       })
-
+      
+      renderTopAnime(data.sort((a, b) => b.views - a.views).slice(0, 5))
       renderAnimeList(data, ganres)
+      renderGanreList(ganres)
     })
 }
 
