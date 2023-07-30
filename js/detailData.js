@@ -19,7 +19,6 @@ const detailData = () => {
         const subTitleBlock = document.querySelector('.anime__details__title span')
         const descriptionBlock = document.querySelector('.anime__details__text p')
         const widgetList = document.querySelectorAll('.anime__details__widget ul li')
-        const breadcrumb = document.querySelector('.breadcrumb__links span')
 
         if (animeObj) {
             imageBlock.dataset.setbg = animeObj.image
@@ -40,8 +39,6 @@ const detailData = () => {
                 <span>Genre:</span> ${animeObj.tags.join(", ")}
             `)
 
-            breadcrumb.textContent = animeObj.ganre
-
             document.querySelectorAll('.set-bg').forEach((elem) => {
                 elem.style.backgroundImage = `url(${elem.dataset.setbg})`
             })
@@ -52,6 +49,17 @@ const detailData = () => {
         } else {
             console.log('Аниме отсутствует!');
         }
+    }
+
+    const setBreadcrumbs = (data, itemId) => {
+        const breadcrumbs = document.querySelector('.breadcrumb__links')
+        const anime = data.find(item => item.id == itemId)
+        
+        breadcrumbs.insertAdjacentHTML('beforeend', `
+            <a href="./index.html"><i class="fa fa-home"></i> Главная</a>
+            <a href="./categories.html?ganre=${anime.ganre}">${anime.ganre}</a>
+            <span>${anime.title}</span>
+        `)
     }
 
     fetch('https://anime-dd1ff-default-rtdb.firebaseio.com/anime.json')
@@ -70,6 +78,7 @@ const detailData = () => {
                 console.log('Аниме отсутствует!');
             }
             renderGanreList(ganres)
+            setBreadcrumbs(data, ganreParams)
         })
 }
 

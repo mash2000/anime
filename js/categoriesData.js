@@ -89,6 +89,15 @@ const categoriesData = () => {
         })
     }
 
+    const setBreadcrumbs = (ganre) => {
+        const breadcrumbs = document.querySelector('.breadcrumb__links')
+        
+        breadcrumbs.insertAdjacentHTML('beforeend', `
+            <a href="./index.html"><i class="fa fa-home"></i> Главная</a>
+            <span>${ganre}</span>
+        `)
+    }
+
     fetch('https://anime-dd1ff-default-rtdb.firebaseio.com/anime.json')
         .then((response) => response.json())
         .then((data) => {
@@ -106,6 +115,7 @@ const categoriesData = () => {
                 renderAnimeList(data, ganres)
             }
             renderGanreList(ganres)
+            setBreadcrumbs(ganreParams)
         })
 }
 
