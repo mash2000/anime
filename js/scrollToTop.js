@@ -5,9 +5,9 @@ const scrollToTop = () => {
     e.preventDefault()
 
     seamless.scrollIntoView(document.querySelector(".header"), {
-        behavior: "smooth",
-        block: "center",
-        inline: "center",
+      behavior: "smooth",
+      block: "center",
+      inline: "center",
     });
   })
 }

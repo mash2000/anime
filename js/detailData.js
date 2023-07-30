@@ -4,11 +4,11 @@ const detailData = () => {
     const renderGanreList = (ganres) => {
         const dropdownBlock = document.querySelector('.header__menu .dropdown')
 
-       ganres.forEach(ganre => {
+        ganres.forEach(ganre => {
             dropdownBlock.insertAdjacentHTML('beforeend', `
                 <li><a href="./categories.html?ganre=${ganre}">${ganre}</a></li>
             `)
-       })
+        })
     }
 
     const renderAnimeDetails = (array, itemId) => {
@@ -26,7 +26,7 @@ const detailData = () => {
             viewsBlock.insertAdjacentHTML('beforeend', `
                 <i class="fa fa-eye"></i> ${animeObj.views}</div>
             `)
-       
+
             titleBlock.textContent = animeObj.title
             subTitleBlock.textContent = animeObj['original-title']
             descriptionBlock.textContent = animeObj.description
