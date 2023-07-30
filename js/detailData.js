@@ -30,13 +30,13 @@ const detailData = () => {
             subTitleBlock.textContent = animeObj['original-title']
             descriptionBlock.textContent = animeObj.description
             widgetList[0].insertAdjacentHTML('beforeend', `
-                <span>Date aired:</span>${animeObj.date}
+                <span>Дата выхода:</span>${animeObj.date}
             `)
             widgetList[1].insertAdjacentHTML('beforeend', `
-                <span>Raiting:</span> ${animeObj.rating}
+                <span>Оценка:</span> ${animeObj.rating} / 10
             `)
             widgetList[2].insertAdjacentHTML('beforeend', `
-                <span>Genre:</span> ${animeObj.tags.join(", ")}
+                <span>Жанр:</span> ${animeObj.tags.join(", ")}
             `)
 
             document.querySelectorAll('.set-bg').forEach((elem) => {
