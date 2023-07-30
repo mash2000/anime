@@ -54,7 +54,7 @@ const mainData = () => {
                   </div>
                   <div class="product__item__text">
                       ${tagsBlock.outerHTML}
-                      <h5><a href="/animeDetails.html?itemId=${item.id}">${item.title}</a></h5>
+                      <h5><a href="/anime-details.html?itemId=${item.id}">${item.title}</a></h5>
                   </div>
               </div>
           </div>
@@ -78,7 +78,7 @@ const mainData = () => {
         <div class="product__sidebar__view__item set-bg mix day years" data-setbg="${item.image}">
             <div class="ep">${item.rating} / 10</div>
             <div class="view"><i class="fa fa-eye"></i> ${item.views}</div>
-            <h5><a href="/animeDetails.html?itemId=${item.id}">${item.title}</a></h5>
+            <h5><a href="/anime-details.html?itemId=${item.id}">${item.title}</a></h5>
         </div>
       `)
     })
